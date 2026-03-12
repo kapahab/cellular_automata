@@ -8,6 +8,7 @@ public class NestMaker : MonoBehaviour
     public int fluctuationAmount;
 
     [SerializeField] private GameObject queenInstance;
+    [SerializeField] private AntManager antManager;
     void Start()
     {
         
@@ -60,7 +61,8 @@ public class NestMaker : MonoBehaviour
 
     void SpawnQueen(Vector3 point)
     {
-        Instantiate(queenInstance, new Vector3(point.x,point.y,0), Quaternion.identity);
+        GameObject queen = Instantiate(queenInstance, new Vector3(point.x,point.y,0), Quaternion.identity);
+        queen.GetComponent<Queen>().antManager = antManager;
     }
 
 }

@@ -46,6 +46,14 @@ public static class SandManipulation
     public static int GetHeight() => currentSandEnvironment != null ? currentSandEnvironment.height : 0;
     public static CellState[,] GetGrid() => currentSandEnvironment?.grid;
 
+    public static void MakeFood(int x, int y)
+    {
+        if (!CheckBounds(x, y))
+        {
+            return;
+        }
+        currentSandEnvironment.grid[x,y] = CellState.Food;
+    }
     public static void Dig(int x, int y) //geldigi yeri bilmeli ki arkasini kapamasin 
     {
         if (!CheckBounds(x, y))

@@ -28,6 +28,18 @@ public class SandSimulation : MonoBehaviour //PROJEDE YAPILACAKLAR, KARINCA SIST
     private SpriteRenderer spriteRenderer;
 
     [SerializeField] private PheromoneGrid pheromoneGrid;
+
+    private static readonly Vector2Int[] neighborDirections = new Vector2Int[]
+{
+        new Vector2Int(0, 1),   // Up
+        new Vector2Int(0, -1),  // Down
+        new Vector2Int(-1, 0),  // Left
+        new Vector2Int(1, 0),   // Right
+        new Vector2Int(-1, 1),  // Up-Left
+        new Vector2Int(1, 1),   // Up-Right
+        new Vector2Int(-1, -1), // Down-Left
+        new Vector2Int(1, -1)   // Down-Right
+};
     void Start()
     {
         SandManipulation.currentSandEnvironment = this;
@@ -116,31 +128,63 @@ public class SandSimulation : MonoBehaviour //PROJEDE YAPILACAKLAR, KARINCA SIST
         {
             for (int x = 0; x < width; x++)
             {
-                if (grid[x, y] == CellState.Sand)
+                if (grid[x, y] == CellState.Sand || grid[x, y] == CellState.Food)
                 {
-                    // Move Down
-                    if (y > 0 && grid[x, y - 1] == CellState.Empty)
-                    {
-                        grid[x, y] = CellState.Empty;
-                        grid[x, y - 1] = CellState.Sand;
-                    }
-                    // Move Down-Left
-                    else if (y > 0 && x > 0 && grid[x - 1, y - 1] == CellState.Empty)
-                    {
-                        grid[x, y] = CellState.Empty;
-                        grid[x - 1, y - 1] = CellState.Sand;
-                    }
-                    // Move Down-Right
-                    else if (y > 0 && x < width - 1 && grid[x + 1, y - 1] == CellState.Empty)
-                    {
-                        grid[x, y] = CellState.Empty;
-                        grid[x + 1, y - 1] = CellState.Sand;
-                    }
+                    FallingParticle(grid[x, y], x, y);
                 }
+
+                //else if (grid[x, y] == CellState.HardenedSand)
+                //{
+                //    bool isSupported = false;
+
+                //    for (int i = 0; i < neighborDirections.Length; i++)
+                //    {
+                //        int checkX = x + neighborDirections[i].x;
+                //        int checkY = y + neighborDirections[i].y;
+
+                //        if (SandManipulation.CheckBounds(checkX, checkY))
+                //        {
+                //            CellState neighborCell = grid[checkX, checkY];
+
+                //            if (neighborCell != CellState.Empty && neighborCell != CellState.HardenedSand)
+                //            {
+
+                //                isSupported = true;
+                //                break;
+                //            }
+                //        }
+                //    }
+
+                //    if (!isSupported)
+                //    {
+                //        grid[x, y] = CellState.Empty;
+                //    }
+                //}
             }
         }
     }
 
+
+    void FallingParticle(CellState fallingCell,int x, int y)
+    {
+        if (y > 0 && grid[x, y - 1] == CellState.Empty)
+        {
+            grid[x, y] = CellState.Empty;
+            grid[x, y - 1] = fallingCell;
+        }
+        // Move Down-Left
+        else if (y > 0 && x > 0 && grid[x - 1, y - 1] == CellState.Empty)
+        {
+            grid[x, y] = CellState.Empty;
+            grid[x - 1, y - 1] = fallingCell;
+        }
+        // Move Down-Right
+        else if (y > 0 && x < width - 1 && grid[x + 1, y - 1] == CellState.Empty)
+        {
+            grid[x, y] = CellState.Empty;
+            grid[x + 1, y - 1] = fallingCell;
+        }
+    }
 
     void Draw()
     {
@@ -163,7 +207,11 @@ public class SandSimulation : MonoBehaviour //PROJEDE YAPILACAKLAR, KARINCA SIST
                 {
                     pixels[index] = Color.gray;
                 }
-                
+                else if (grid[x, y] == CellState.Food)
+                {
+                    pixels[index] = Color.green;
+                }
+
             }
         }
 

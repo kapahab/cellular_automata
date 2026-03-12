@@ -402,7 +402,8 @@ GameObject:
   - component: {fileID: 841510742}
   - component: {fileID: 841510743}
   - component: {fileID: 841510744}
-  - component: {fileID: 841510745}
+  - component: {fileID: 841510746}
+  - component: {fileID: 841510747}
   m_Layer: 0
   m_Name: SandSim
   m_TagString: Untagged
@@ -442,7 +443,7 @@ MonoBehaviour:
   circleRadius: 15
   sandColor: {r: 0.76, g: 0.69, b: 0.5, a: 1}
   emptyColor: {r: 1, g: 1, b: 1, a: 1}
-  pheromoneGrid: {fileID: 841510745}
+  pheromoneGrid: {fileID: 1717311062}
 --- !u!114 &841510743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,7 +472,8 @@ MonoBehaviour:
   circleRadius: 6
   fluctuationAmount: 4
   queenInstance: {fileID: 3520311696601077921, guid: 5d6613d6c97555947b83675226a4eff8, type: 3}
---- !u!114 &841510745
+  antManager: {fileID: 841510746}
+--- !u!114 &841510746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -480,9 +482,70 @@ MonoBehaviour:
   m_GameObject: {fileID: 841510740}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8af913d29fa17468849ed3fddf7fd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalMoveSpeed: 0.2
+  antPrefab: {fileID: 1986356494873344398, guid: 3ea795bc99c076146a152785a1712ec4, type: 3}
+--- !u!114 &841510747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841510740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0313979aba3ba0347a478ce526e5a615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1717311061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1717311063}
+  - component: {fileID: 1717311062}
+  m_Layer: 0
+  m_Name: Pheromone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1717311062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717311061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14aafee39aa635d42bbbb6c646c00f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showDebugHeatmap: 1
+  maxPheromoneValue: 100
+  debugColor: {r: 0, g: 0, b: 1, a: 1}
+--- !u!4 &1717311063
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717311061}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -491,3 +554,4 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 294514308}
   - {fileID: 841510741}
+  - {fileID: 1717311063}
